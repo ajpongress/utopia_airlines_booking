@@ -206,20 +206,28 @@ public class AirportDAO {
 
         boolean success = false;
         Connection conn = SQLConnect_Singleton.getInstance().getConnection();
-        ArrayList<AirportDTO> airportDTOarray = new ArrayList<>();
+        //ArrayList<AirportDTO> airportDTOarray = new ArrayList<>();
 
         String query = "SELECT * FROM tbl_airport";
 
+
+
         try {
-            conn.setAutoCommit(false);
+            //conn.setAutoCommit(false);
             PreparedStatement prepstmt = conn.prepareStatement(query);
             ResultSet resultSet = prepstmt.executeQuery();
-            conn.commit();
-            conn.setAutoCommit(true);
-            success = true;
+            //conn.commit();
+            //conn.setAutoCommit(true);
 
-            System.out.println("ICAOIdent\t\tcity\t\t\t\tname\t\t\t\t\t\t\t\t\tairportId");
-            System.out.println("-------------------------------------------------------------------------------------");
+            String column1Format = "%-12.12s";
+            String column2Format = "%-15.15s";
+            String column3Format = "%-30.30s";
+            String column4Format = "%-10.10s";
+            String formatInfo = column1Format + " " + column2Format + " " + column3Format + " " + column4Format;
+
+            System.out.format(formatInfo, "ICAOIdent", "City", "Name", "AirportId");
+            System.out.println();
+            System.out.println("----------------------------------------------------------------------");
 
             while (resultSet.next()) {
 
@@ -228,11 +236,15 @@ public class AirportDAO {
                 String name = resultSet.getString("name");
                 int airportId = resultSet.getInt("airportId");
 
-                System.out.println(iataIdent + "\t\t\t" + city + "\t\t\t\t" + name + "\t\t\t\t\t\t\t\t\t" + airportId);
+                System.out.format(formatInfo, iataIdent, city, name, airportId);
+                System.out.println();
             }
 
+
+            success = true;
+
         } catch (SQLException sqle) {
-            conn.rollback();
+            //conn.rollback();
             System.out.println("Invalid SQL query: " + sqle);
         } finally {
             if (conn != null) conn.close();
