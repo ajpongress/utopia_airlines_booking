@@ -2,6 +2,7 @@ package Airport_pckg;
 
 import Utility.SQLConnect_Singleton;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class AirportDAO {
 
@@ -205,8 +206,37 @@ public class AirportDAO {
 
         boolean success = false;
         Connection conn = SQLConnect_Singleton.getInstance().getConnection();
+        ArrayList<AirportDTO> airportDTOarray = new ArrayList<>();
 
+        String query = "SELECT * FROM tbl_airport";
 
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement prepstmt = conn.prepareStatement(query);
+            ResultSet resultSet = prepstmt.executeQuery();
+            conn.commit();
+            conn.setAutoCommit(true);
+            success = true;
+
+            System.out.println("ICAOIdent\t\tcity\t\t\t\tname\t\t\t\t\t\t\t\t\tairportId");
+            System.out.println("-------------------------------------------------------------------------------------");
+
+            while (resultSet.next()) {
+
+                String iataIdent = resultSet.getString("iataIdent");
+                String city = resultSet.getString("city");
+                String name = resultSet.getString("name");
+                int airportId = resultSet.getInt("airportId");
+
+                System.out.println(iataIdent + "\t\t\t" + city + "\t\t\t\t" + name + "\t\t\t\t\t\t\t\t\t" + airportId);
+            }
+
+        } catch (SQLException sqle) {
+            conn.rollback();
+            System.out.println("Invalid SQL query: " + sqle);
+        } finally {
+            if (conn != null) conn.close();
+        }
         return success;
     }
 
