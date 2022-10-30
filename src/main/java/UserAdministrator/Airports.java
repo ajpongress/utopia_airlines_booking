@@ -987,12 +987,14 @@ public class Airports {
                 // -----------------------------------------------------------------------------------------------------
                 if (isNumeric(userInput)) {
                     if (Integer.parseInt(userInput) == 4) {
-                        System.out.println("PLACEHOLDER");
                         statusMessage = "";
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
 
-                        // View airport loop
-
+                        // View airports
+                        AirportDAO objAirportDAO = new AirportDAO();
+                        System.out.println("\n");
+                        objAirportDAO.viewAirports();
+                        System.out.println("\n");
 
                     }//END option 4 (view airports)
                 }
