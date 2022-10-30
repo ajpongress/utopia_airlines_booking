@@ -30,6 +30,8 @@ public class Flight_Details {
     // -----------------------------------------------
     public boolean flightDetailsMenus(String userInput, String statusMessage, BufferedReader objBuffRead) throws IOException, InterruptedException, SQLException, ClassNotFoundException {
 
+        boolean flightDetailsAddMenu = false;
+
         // Flight Details loop
         while (true) {
 
@@ -58,7 +60,61 @@ public class Flight_Details {
 
             if (Integer.parseInt(userInput) == 1) {
 
+                flightDetailsAddMenu = true;
+                statusMessage = "";
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
 
+                // Add flight details loop
+                while (flightDetailsAddMenu) {
+                    // Locals
+                    String storedflightNumber = null;
+                    String storedDepartCityId = null;
+                    String storedArriveCityId = null;
+                    int inputCounter = 1;
+
+                    System.out.println("ADMINISTRATOR - ADD FLIGHT DETAILS\n");
+
+                    System.out.println("(Type \"quit\" or \"exit\" to quit program at any time)");
+                    System.out.println("(Type \"goback\" to return to previous menu)\n");
+
+                    System.out.println("Input in order: Flight Number, Departure Airport Id, Arrival Airport Id:\n");
+
+                    // Use int counters and loops to keep track of proper input sequence and store values only with proper input
+
+                    // Get input of flight number 1st
+                    while(inputCounter == 1) { // Input counter starts at 1
+
+                        System.out.println(statusMessage);
+                        System.out.print("> "); // User prompt
+                        userInput = objBuffRead.readLine();
+
+                        // Check if "quit" or "exit" was typed
+                        if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                            System.out.println("Now exiting.");
+                            System.exit(0);
+                        }
+                        // Check if "goback" was typed
+                        if (Objects.equals(userInput, "goback")) {
+                            flightDetailsAddMenu = false;
+                            statusMessage = "";
+                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                            break;
+                        }
+
+
+                    }
+
+                    // Get input of depart airport id 2nd
+                    while(inputCounter == 2) {
+
+                    }
+
+                    // Get input of arrive airport id 3rd
+                    while(inputCounter == 3) {
+
+                    }
+
+                }
             }
 
             // -----------------------------------------------------------------------------------------------------

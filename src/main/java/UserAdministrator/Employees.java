@@ -30,6 +30,8 @@ public class Employees {
     // -----------------------------------------------
     public boolean employeesMenus(String userInput, String statusMessage, BufferedReader objBuffRead) throws IOException, InterruptedException, SQLException, ClassNotFoundException {
 
+        boolean employeeAddMenu = false;
+
         // Employees loop
         while (true) {
 
@@ -58,7 +60,84 @@ public class Employees {
 
             if (Integer.parseInt(userInput) == 1) {
 
+               employeeAddMenu = true;
+                statusMessage = "";
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
 
+                // Add employee loop
+                while (employeeAddMenu) {
+                    // Locals
+                    int storedRoleId = -1;
+                    String storedFirstName = null;
+                    String storedLastName = null;
+                    String storedUserName = null;
+                    String storedEmail = null;
+                    String storedPassword = null;
+                    String storedPhone = null;
+                    int inputCounter = 1;
+
+                    System.out.println("ADMINISTRATOR - ADD EMPLOYEE\n");
+
+                    System.out.println("(Type \"quit\" or \"exit\" to quit program at any time)");
+                    System.out.println("(Type \"goback\" to return to previous menu)\n");
+
+                    System.out.println("Input in order: Role Id, First Name, Last Name, Phone Number, Email, Username, Password:\n");
+
+                    // Use int counters and loops to keep track of proper input sequence and store values only with proper input
+
+                    // Get input of Role Id 1st
+                    while(inputCounter == 1) { // Input counter starts at 1
+
+                        System.out.println(statusMessage);
+                        System.out.print("> "); // User prompt
+                        userInput = objBuffRead.readLine();
+
+                        // Check if "quit" or "exit" was typed
+                        if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                            System.out.println("Now exiting.");
+                            System.exit(0);
+                        }
+                        // Check if "goback" was typed
+                        if (Objects.equals(userInput, "goback")) {
+                            employeeAddMenu = false;
+                            statusMessage = "";
+                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                            break;
+                        }
+
+
+                    }
+
+                    // Get input of first name 2nd
+                    while(inputCounter == 2) {
+
+                    }
+
+                    // Get input of last name 3rd
+                    while(inputCounter == 3) {
+
+                    }
+
+                    // Get input of phone number 4th
+                    while(inputCounter == 4) {
+
+                    }
+
+                    // Get input of email 5th
+                    while(inputCounter == 5) {
+
+                    }
+
+                    // Get input of username 6th
+                    while(inputCounter == 6) {
+
+                    }
+
+                    // Get input of password 7th
+                    while(inputCounter == 7) {
+
+                    }
+                }
             }
 
             // -----------------------------------------------------------------------------------------------------
