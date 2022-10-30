@@ -7,6 +7,10 @@ public class AirportDAO {
     // Add airport
     public boolean addAirport(String iataIdent, String city, String name, int airportId) throws SQLException, ClassNotFoundException {
 
+        // Check for null input
+        if (iataIdent == null || city == null || name == null || airportId == -1) {
+            return false;
+        }
         boolean success = false;
         Connection conn = null;
         AirportDTO objAirportDTOadd = new AirportDTO(iataIdent, city, name, airportId);
@@ -40,6 +44,10 @@ public class AirportDAO {
     // Delete Airport based on iataIdent or airportId
     public boolean deleteAirport(String iataIdent,int airportId) throws SQLException, ClassNotFoundException {
 
+        // Check for null input
+        if (iataIdent == null || airportId == -1) {
+            return false;
+        }
         boolean success = false;
         Connection conn = null;
         AirportDTO objAirportDTOdelete = new AirportDTO(iataIdent, "", "", airportId);
