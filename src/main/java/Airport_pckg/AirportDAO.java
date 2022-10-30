@@ -206,18 +206,15 @@ public class AirportDAO {
 
         boolean success = false;
         Connection conn = SQLConnect_Singleton.getInstance().getConnection();
-        //ArrayList<AirportDTO> airportDTOarray = new ArrayList<>();
 
         String query = "SELECT * FROM tbl_airport";
 
-
-
         try {
-            //conn.setAutoCommit(false);
+            conn.setAutoCommit(false);
             PreparedStatement prepstmt = conn.prepareStatement(query);
             ResultSet resultSet = prepstmt.executeQuery();
-            //conn.commit();
-            //conn.setAutoCommit(true);
+            conn.commit();
+            conn.setAutoCommit(true);
 
             String column1Format = "%-12.12s";
             String column2Format = "%-15.15s";
@@ -244,7 +241,7 @@ public class AirportDAO {
             success = true;
 
         } catch (SQLException sqle) {
-            //conn.rollback();
+            conn.rollback();
             System.out.println("Invalid SQL query: " + sqle);
         } finally {
             if (conn != null) conn.close();
