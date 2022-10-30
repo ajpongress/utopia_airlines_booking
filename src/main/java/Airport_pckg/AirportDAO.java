@@ -1,5 +1,6 @@
 package Airport_pckg;
 
+import Utility.SQLConnect_Singleton;
 import java.sql.*;
 
 public class AirportDAO {
@@ -12,15 +13,12 @@ public class AirportDAO {
             return false;
         }
         boolean success = false;
-        Connection conn = null;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
         AirportDTO objAirportDTO = new AirportDTO(iataIdent, city, name, airportId);
+
+        String query = "INSERT INTO tbl_airport(iataIdent, city, name, airportId) VALUES ( ?, ?, ?, ?)";
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/utopia";
-            conn = DriverManager.getConnection(url, "sstack", "password");
-
-            String query = "INSERT INTO tbl_airport(iataIdent, city, name, airportId) VALUES ( ?, ?, ?, ?)";
-
             conn.setAutoCommit(false);
             PreparedStatement prepstmt = conn.prepareStatement(query);
             prepstmt.setString(1, objAirportDTO.getIataIdent());
@@ -50,16 +48,13 @@ public class AirportDAO {
             return false;
         }
         boolean success = false;
-        Connection conn = null;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
         AirportDTO objAirportDTOupdateOLD = new AirportDTO(iataIdentOLD, "", "", 0);
         AirportDTO objAirportDTOupdateNEW = new AirportDTO(iataIdentNEW, "", "", 0);
+
+        String query = "UPDATE tbl_airport SET iataIdent=? WHERE iataIdent=?";
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/utopia";
-            conn = DriverManager.getConnection(url, "sstack", "password");
-
-            String query = "UPDATE tbl_airport SET iataIdent=? WHERE iataIdent=?";
-
             conn.setAutoCommit(false);
             PreparedStatement prepstmt = conn.prepareStatement(query);
             prepstmt.setString(1, objAirportDTOupdateNEW.getIataIdent());
@@ -86,15 +81,12 @@ public class AirportDAO {
             return false;
         }
         boolean success = false;
-        Connection conn = null;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
         AirportDTO objAirportDTO = new AirportDTO(iataIdent, city, "", 0);
+
+        String query = "UPDATE tbl_airport SET city=? WHERE iataIdent=?";
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/utopia";
-            conn = DriverManager.getConnection(url, "sstack", "password");
-
-            String query = "UPDATE tbl_airport SET city=? WHERE iataIdent=?";
-
             conn.setAutoCommit(false);
             PreparedStatement prepstmt = conn.prepareStatement(query);
             prepstmt.setString(1, objAirportDTO.getCity());
@@ -121,15 +113,12 @@ public class AirportDAO {
             return false;
         }
         boolean success = false;
-        Connection conn = null;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
         AirportDTO objAirportDTO = new AirportDTO(iataIdent, "", name, 0);
+
+        String query = "UPDATE tbl_airport SET name=? WHERE iataIdent=?";
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/utopia";
-            conn = DriverManager.getConnection(url, "sstack", "password");
-
-            String query = "UPDATE tbl_airport SET name=? WHERE iataIdent=?";
-
             conn.setAutoCommit(false);
             PreparedStatement prepstmt = conn.prepareStatement(query);
             prepstmt.setString(1, objAirportDTO.getName());
@@ -156,15 +145,12 @@ public class AirportDAO {
             return false;
         }
         boolean success = false;
-        Connection conn = null;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
         AirportDTO objAirportDTO = new AirportDTO(iataIdent, "", "", airportID);
+
+        String query = "UPDATE tbl_airport SET airportId=? WHERE iataIdent=?";
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/utopia";
-            conn = DriverManager.getConnection(url, "sstack", "password");
-
-            String query = "UPDATE tbl_airport SET airportId=? WHERE iataIdent=?";
-
             conn.setAutoCommit(false);
             PreparedStatement prepstmt = conn.prepareStatement(query);
             prepstmt.setInt(1, objAirportDTO.getAirportId());
@@ -191,15 +177,12 @@ public class AirportDAO {
             return false;
         }
         boolean success = false;
-        Connection conn = null;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
         AirportDTO objAirportDTO = new AirportDTO(iataIdent, "", "", 0);
+
+        String query = "DELETE FROM tbl_airport WHERE iataIdent=?";
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/utopia";
-            conn = DriverManager.getConnection(url, "sstack", "password");
-
-            String query = "DELETE FROM tbl_airport WHERE iataIdent=?";
-
             conn.setAutoCommit(false);
             PreparedStatement prepstmt = conn.prepareStatement(query);
             prepstmt.setString(1, objAirportDTO.getIataIdent());
@@ -221,7 +204,7 @@ public class AirportDAO {
     public boolean viewAirports() throws SQLException, ClassNotFoundException {
 
         boolean success = false;
-        Connection conn = null;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
 
 
         return success;
