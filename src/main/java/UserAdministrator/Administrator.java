@@ -1,7 +1,5 @@
 package UserAdministrator;
 
-import Airport_pckg.AirportDAO;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -93,21 +91,27 @@ public class Administrator {
             // Logic for Administrator input 1-8
             else {
 
-                // Flights
+                // ----------------------------------------------
+                // --                  Flights                 --
+                // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 1) {
                     System.out.println("PLACEHOLDER FLIGHTS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
                 }//END option 1 (flights)
 
-                // Seats
+                // ----------------------------------------------
+                // --                   Seats                  --
+                // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 2) {
                     System.out.println("PLACEHOLDER SEATS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
                 }//END option 2 (seats)
 
-                // Tickets and Passengers
+                // ----------------------------------------------
+                // --             Tickets & Passengers         --
+                // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 3) {
                     System.out.println("PLACEHOLDER TICKETS AND PASSENGERS");
                     statusMessage = "";
@@ -124,21 +128,27 @@ public class Administrator {
                     objAirports.airportsMenus(userInput, statusMessage, objBuffRead);
                 }
 
-                // Travellers
+                // ----------------------------------------------
+                // --                 Travelers                --
+                // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 5) {
-                    System.out.println("PLACEHOLDER TRAVELLERS");
+                    System.out.println("PLACEHOLDER TRAVELERS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
                 }//END option 5 (travellers)
 
-                // Employees
+                // ----------------------------------------------
+                // --                 Employees                --
+                // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 6) {
                     System.out.println("PLACEHOLDER EMPLOYEES");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
                 }//END option 6 (employees)
 
-                // Ticket Cancellation
+                // ----------------------------------------------
+                // --            Ticket Cancellation           --
+                // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 7) {
                     System.out.println("PLACEHOLDER TICKET CANCELLATION");
                     statusMessage = "";
