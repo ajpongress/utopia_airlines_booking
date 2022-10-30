@@ -3,7 +3,7 @@ package Utility;
 import java.sql.*;
 
 public class SQLConnect_Singleton {
-    private static SQLConnect_Singleton instance;
+    private volatile static SQLConnect_Singleton instance;
     private Connection connection;
     private String url = "jdbc:mysql://localhost:3306/utopia";
     private String username = "sstack";
