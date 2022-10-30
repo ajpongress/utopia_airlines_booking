@@ -41,16 +41,16 @@ public class AirportDAO {
         return success;
     }
 
-    // Delete Airport based on iataIdent or airportId
-    public boolean deleteAirport(String iataIdent,int airportId) throws SQLException, ClassNotFoundException {
+    // Delete Airport based on iataIdent
+    public boolean deleteAirport(String iataIdent) throws SQLException, ClassNotFoundException {
 
         // Check for null input
-        if (iataIdent == null || airportId == -1) {
+        if (iataIdent == null) {
             return false;
         }
         boolean success = false;
         Connection conn = null;
-        AirportDTO objAirportDTOdelete = new AirportDTO(iataIdent, "", "", airportId);
+        AirportDTO objAirportDTOdelete = new AirportDTO(iataIdent, "", "", 0);
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/utopia";

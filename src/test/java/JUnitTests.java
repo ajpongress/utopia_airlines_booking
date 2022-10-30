@@ -15,6 +15,6 @@ public class JUnitTests {
 
         AirportDAO testAirportDAO = new AirportDAO();
         assertTrue(testAirportDAO.addAirport("TST1", "Test City", "Test name", 999));
-        assertTrue(testAirportDAO.deleteAirport("TST1", 999));
+        assertTrue(testAirportDAO.deleteAirport("TST1"));
     }
 }
