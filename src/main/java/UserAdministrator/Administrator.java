@@ -60,12 +60,12 @@ public class Administrator {
             System.out.println("ADMINISTRATOR MAIN MENU\n");
 
             System.out.println("(Type a valid number, or type \"quit\" or \"exit\" to quit program at any time)\n");
-            System.out.println("1) Add/Update/Delete/View Flights");
-            System.out.println("2) Add/Update/Delete/View Seats");
-            System.out.println("3) Add/Update/Delete/View Tickets and Passengers");
-            System.out.println("4) Add/Update/Delete/View Airports");
-            System.out.println("5) Add/Update/Delete/View Travelers");
-            System.out.println("6) Add/Update/Delete/View Employees");
+            System.out.println("1) Add/Update/Delete/View - Flights");
+            System.out.println("2) Add/Update/Delete/View - Flight Details");
+            System.out.println("3) Add/Update/Delete/View - Bookings");
+            System.out.println("4) Add/Update/Delete/View - Airports");
+            System.out.println("5) Add/Update/Delete/View - Travelers");
+            System.out.println("6) Add/Update/Delete/View - Employees");
             System.out.println("7) Override Ticket Cancellation");
             System.out.println("8) Return to Main Menu\n");
 
@@ -95,27 +95,30 @@ public class Administrator {
                 // --                  Flights                 --
                 // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 1) {
-                    System.out.println("PLACEHOLDER FLIGHTS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                    Flights objFlights = new Flights();
+                    objFlights.flightsMenus(userInput, statusMessage, objBuffRead);
                 }
 
                 // ----------------------------------------------
-                // --                   Seats                  --
+                // --              Flight Details              --
                 // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 2) {
-                    System.out.println("PLACEHOLDER SEATS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                    Flight_Details objFlightDetails = new Flight_Details();
+                    objFlightDetails.flightDetailsMenus(userInput, statusMessage, objBuffRead);
                 }
 
                 // ----------------------------------------------
-                // --             Tickets & Passengers         --
+                // --                   Bookings               --
                 // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 3) {
-                    System.out.println("PLACEHOLDER TICKETS AND PASSENGERS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                    Bookings objBookings = new Bookings();
+                    objBookings.bookingsMenus(userInput, statusMessage, objBuffRead);
                 }
 
                 // ----------------------------------------------
@@ -132,25 +135,26 @@ public class Administrator {
                 // --                 Travelers                --
                 // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 5) {
-                    System.out.println("PLACEHOLDER TRAVELERS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                    Travelers objTravelers = new Travelers();
+                    objTravelers.travelersMenus(userInput, statusMessage, objBuffRead);
                 }
 
                 // ----------------------------------------------
                 // --                 Employees                --
                 // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 6) {
-                    System.out.println("PLACEHOLDER EMPLOYEES");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                    Employees objEmployees = new Employees();
+                    objEmployees.employeesMenus(userInput, statusMessage, objBuffRead);
                 }
 
                 // ----------------------------------------------
                 // --            Ticket Cancellation           --
                 // ----------------------------------------------
                 if (Integer.parseInt(userInput) == 7) {
-                    System.out.println("PLACEHOLDER TICKET CANCELLATION");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
                 }
