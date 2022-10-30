@@ -9,12 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Tag("myCustomTag")
 public class JUnitTests {
 
-    // Test add and delete airport methods
+    // Test airport add, update ICAO, update city, update airport name, update airport ID, delete methods
     @Test
-    public void addAirport_should_add_KFAT_Fresno_FresnoYosemiteInternationalAirport_1_to_utopia_tbl_airport_and_deleteAirport_should_remove_it() throws SQLException, ClassNotFoundException {
+    public void adds_TSTA_airport_updates_TSTA_to_TSTB_updates_TestCityA_to_TestCityB_updates_TestnameA_to_TestnameB_updates_999_to_998_deletes_TSTB() throws SQLException, ClassNotFoundException {
 
         AirportDAO testAirportDAO = new AirportDAO();
-        assertTrue(testAirportDAO.addAirport("TST1", "Test City", "Test name", 999));
-        assertTrue(testAirportDAO.deleteAirport("TST1"));
+        assertTrue(testAirportDAO.addAirport("TSTA", "Test City A", "Test name A", 999));
+        assertTrue(testAirportDAO.updateAirportICAO("TSTA", "TSTB"));
+        assertTrue(testAirportDAO.updateAirportCity("TSTB", "Test City B"));
+        assertTrue(testAirportDAO.updateAirportName("TSTB", "Test name B"));
+        assertTrue(testAirportDAO.updateAirportID("TSTB", 998));
+        assertTrue(testAirportDAO.deleteAirport("TSTB"));
     }
+
+
 }
