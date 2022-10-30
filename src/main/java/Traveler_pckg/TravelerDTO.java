@@ -1,6 +1,5 @@
 package Traveler_pckg;
 
-
 public class TravelerDTO {
 
     // Locals
