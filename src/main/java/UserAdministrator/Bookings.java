@@ -1,6 +1,6 @@
 package UserAdministrator;
 
-import Employees_pckg.EmployeeDAO;
+import Booking_pckg.BookingDAO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Employees {
+public class Bookings {
 
     // Check if a string is numeric
     public static boolean isNumeric(String stringNum) {
@@ -26,20 +26,20 @@ public class Employees {
     }
 
     // -----------------------------------------------
-    // --                Employees                  --
+    // --                 Bookings                  --
     // -----------------------------------------------
-    public boolean employeesMenus(String userInput, String statusMessage, BufferedReader objBuffRead) throws IOException, InterruptedException, SQLException, ClassNotFoundException {
+    public boolean bookingsMenus(String userInput, String statusMessage, BufferedReader objBuffRead) throws IOException, InterruptedException, SQLException, ClassNotFoundException {
 
-        // Employees loop
+        // Bookings loop
         while (true) {
 
-            System.out.println("ADMINISTRATOR - EMPLOYEES MENU\n");
+            System.out.println("ADMINISTRATOR - BOOKINGS MENU\n");
 
             System.out.println("(Type a valid number, or type \"quit\" or \"exit\" to quit program at any time)\n");
-            System.out.println("1) Add Employee");
-            System.out.println("2) Update Employee");
-            System.out.println("3) Delete Employee");
-            System.out.println("4) View Employees");
+            System.out.println("1) Add Booking");
+            System.out.println("2) Update Booking");
+            System.out.println("3) Delete Booking");
+            System.out.println("4) View Bookings");
             System.out.println("5) Return to previous menu\n");
 
             System.out.println(statusMessage);
@@ -53,7 +53,7 @@ public class Employees {
             }
 
             // -----------------------------------------------------------------------------------------------------
-            // --                                        Add Employee                                             --
+            // --                                         Add Booking                                             --
             // -----------------------------------------------------------------------------------------------------
 
             if (Integer.parseInt(userInput) == 1) {
@@ -62,7 +62,7 @@ public class Employees {
             }
 
             // -----------------------------------------------------------------------------------------------------
-            // --                                       Update Employee                                           --
+            // --                                       Update Booking                                            --
             // -----------------------------------------------------------------------------------------------------
             if (isNumeric(userInput)) {
                 if (Integer.parseInt(userInput) == 2) {
@@ -71,7 +71,7 @@ public class Employees {
             }
 
             // -----------------------------------------------------------------------------------------------------
-            // --                                       Delete Employee                                           --
+            // --                                       Delete Booking                                            --
             // -----------------------------------------------------------------------------------------------------
             if (isNumeric(userInput)) {
                 if (Integer.parseInt(userInput) == 3) {
@@ -80,7 +80,7 @@ public class Employees {
             }
 
             // -----------------------------------------------------------------------------------------------------
-            // --                                        View Employees                                           --
+            // --                                        View Bookings                                            --
             // -----------------------------------------------------------------------------------------------------
             if (isNumeric(userInput)) {
                 if (Integer.parseInt(userInput) == 4) {
