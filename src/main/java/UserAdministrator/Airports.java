@@ -991,9 +991,9 @@ public class Airports {
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
 
                         // View airports
-                        AirportDAO objAirportDAO = new AirportDAO();
+                        AirportDAO objAirportDAOview = new AirportDAO();
                         System.out.println("\n");
-                        objAirportDAO.viewAirports();
+                        objAirportDAOview.viewAirports();
                         System.out.println("\n");
 
                     }//END option 4 (view airports)
