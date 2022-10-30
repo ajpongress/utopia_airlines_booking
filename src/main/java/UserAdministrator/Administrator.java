@@ -98,7 +98,7 @@ public class Administrator {
                     System.out.println("PLACEHOLDER FLIGHTS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
-                }//END option 1 (flights)
+                }
 
                 // ----------------------------------------------
                 // --                   Seats                  --
@@ -107,7 +107,7 @@ public class Administrator {
                     System.out.println("PLACEHOLDER SEATS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
-                }//END option 2 (seats)
+                }
 
                 // ----------------------------------------------
                 // --             Tickets & Passengers         --
@@ -116,7 +116,7 @@ public class Administrator {
                     System.out.println("PLACEHOLDER TICKETS AND PASSENGERS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
-                }//END option 3 (tickets and passengers)
+                }
 
                 // ----------------------------------------------
                 // --                 Airports                 --
@@ -135,7 +135,7 @@ public class Administrator {
                     System.out.println("PLACEHOLDER TRAVELERS");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
-                }//END option 5 (travellers)
+                }
 
                 // ----------------------------------------------
                 // --                 Employees                --
@@ -144,7 +144,7 @@ public class Administrator {
                     System.out.println("PLACEHOLDER EMPLOYEES");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
-                }//END option 6 (employees)
+                }
 
                 // ----------------------------------------------
                 // --            Ticket Cancellation           --
@@ -153,7 +153,7 @@ public class Administrator {
                     System.out.println("PLACEHOLDER TICKET CANCELLATION");
                     statusMessage = "";
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
-                }//END option 7 (ticket cancellation)
+                }
 
                 // Return to Main Menu
                 if (Integer.parseInt(userInput) == 8) {
