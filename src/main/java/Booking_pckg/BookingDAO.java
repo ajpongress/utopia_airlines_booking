@@ -62,4 +62,51 @@ public class BookingDAO {
         }
         return success;
     }
+
+    // View bookings in database
+    public boolean viewBookings() throws SQLException, ClassNotFoundException {
+
+        boolean success = false;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
+
+        String query = "SELECT * FROM tbl_booking";
+
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement prepstmt = conn.prepareStatement(query);
+            ResultSet resultSet = prepstmt.executeQuery();
+            conn.commit();
+            conn.setAutoCommit(true);
+
+            String column1Format = "%-17.17s";
+            String column2Format = "%-17.17s";
+            String column3Format = "%-17.17s";
+            String column4Format = "%-17.17s";
+            String formatInfo = column1Format + " " + column2Format + " " + column3Format + " " + column4Format;
+
+            System.out.format(formatInfo, "Booking Id", "Flag:Is Active", "Stripe Id", "Booker Id");
+            System.out.println();
+            System.out.println("---------------------------------------------------------------");
+
+            while (resultSet.next()) {
+
+                int bookingId = resultSet.getInt("bookingId");
+                int isActive = resultSet.getInt("isActive");
+                String stripeId = resultSet.getString("stripeId");
+                int bookerId = resultSet.getInt("bookerId");
+
+                System.out.format(formatInfo, bookingId, isActive, stripeId, bookingId);
+                System.out.println();
+            }
+
+            success = true;
+
+        } catch (SQLException sqle) {
+            conn.rollback();
+            System.out.println("Invalid SQL query: " + sqle);
+        } finally {
+            if (conn != null) conn.close();
+        }
+        return success;
+    }
 }

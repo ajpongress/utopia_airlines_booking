@@ -247,7 +247,7 @@ public class TravelerDAO {
             success = true;
 
         } catch (SQLException sqle) {
-            //conn.rollback();
+            conn.rollback();
             System.out.println("Invalid SQL query: " + sqle);
         } finally {
             if (conn != null) conn.close();

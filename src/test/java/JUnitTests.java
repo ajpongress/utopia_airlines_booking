@@ -68,6 +68,14 @@ public class JUnitTests {
         testFlight_DetailsDAO.deleteFlight_Details("900");
     }
 
+    // Test flight details view (print)
+    @Test
+    public void should_connect_and_print_tbl_flight_details() throws SQLException, ClassNotFoundException {
+
+        Flight_DetailsDAO testFlight_DetailsDAO = new Flight_DetailsDAO();
+        testFlight_DetailsDAO.viewFlight_Details();
+    }
+
     // Test flight add/delete methods
     @Test
     public void adds_flight_100_departing_2000_1_1_arriving_2000_1_1_78_seatsavailable_price_454_19_and_deletes_based_on_flight_100() throws SQLException, ClassNotFoundException {
@@ -77,13 +85,29 @@ public class JUnitTests {
         testFlightDAO.deleteFlight("100");
     }
 
+    // Test flights view (print)
+    @Test
+    public void should_connect_and_print_tbl_flight() throws SQLException, ClassNotFoundException {
+
+        FlightDAO testFlightDAO = new FlightDAO();
+        testFlightDAO.viewFlights();
+    }
+
     // Test employee add/delete methods
     @Test
     public void adds_employee_Michael_Scott_with_email_michaelscott_at_sstack_with_password_bestbossinworld_enabled1_locked0_userRole23_and_deletes_Michael_Scott() throws SQLException, ClassNotFoundException {
 
         EmployeeDAO testEmployeeDAO = new EmployeeDAO();
-        testEmployeeDAO.addEmployee("bestbossinworld", "michaelscott@sstack.com", "Michael", "Scott", 1, 0, 23);
+        testEmployeeDAO.addEmployee("bestbossinworld", "michaelscott@dundermifflin.com", "Michael", "Scott", 1, 0, 23);
         testEmployeeDAO.deleteEmployee("Scott");
+    }
+
+    // Test employee view (print)
+    @Test
+    public void should_connect_and_print_tbl_users() throws SQLException, ClassNotFoundException {
+
+        EmployeeDAO testEmployeeDAO = new EmployeeDAO();
+        testEmployeeDAO.viewEmployees();
     }
 
     // Test booking add/delete methods (dependent on foreign key userId from tbl_users)
@@ -93,6 +117,14 @@ public class JUnitTests {
         BookingDAO testBookingDAO = new BookingDAO();
         testBookingDAO.addBooking(1, "66", 103);
         testBookingDAO.deleteBooking("66");
+    }
+
+    // Test bookings view (print)
+    @Test
+    public void should_connect_and_print_tbl_booking() throws SQLException, ClassNotFoundException {
+
+        BookingDAO testBookingDAO = new BookingDAO();
+        testBookingDAO.viewBookings();
     }
 
 

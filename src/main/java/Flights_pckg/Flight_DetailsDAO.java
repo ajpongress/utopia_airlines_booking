@@ -61,4 +61,49 @@ public class Flight_DetailsDAO {
         }
         return success;
     }
+
+    // View flight details in database
+    public boolean viewFlight_Details() throws SQLException, ClassNotFoundException {
+
+        boolean success = false;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
+
+        String query = "SELECT * FROM tbl_flight_details";
+
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement prepstmt = conn.prepareStatement(query);
+            ResultSet resultSet = prepstmt.executeQuery();
+            conn.commit();
+            conn.setAutoCommit(true);
+
+            String column1Format = "%-20.20s";
+            String column2Format = "%-25.25s";
+            String column3Format = "%-25.25s";
+            String formatInfo = column1Format + " " + column2Format + " " + column3Format;
+
+            System.out.format(formatInfo, "Flight Number", "Departure Airport", "Arrival Airport");
+            System.out.println();
+            System.out.println("---------------------------------------------------------------");
+
+            while (resultSet.next()) {
+
+                String flightNumber = resultSet.getString("flightNumber");
+                String departCityId = resultSet.getString("departCityId");
+                String arriveCityId = resultSet.getString("arriveCityId");
+
+                System.out.format(formatInfo, flightNumber, departCityId, arriveCityId);
+                System.out.println();
+            }
+
+            success = true;
+
+        } catch (SQLException sqle) {
+            conn.rollback();
+            System.out.println("Invalid SQL query: " + sqle);
+        } finally {
+            if (conn != null) conn.close();
+        }
+        return success;
+    }
 }
