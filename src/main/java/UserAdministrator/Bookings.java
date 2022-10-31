@@ -53,104 +53,174 @@ public class Bookings {
                 System.out.println("Now exiting.");
                 System.exit(0);
             }
-
-            // -----------------------------------------------------------------------------------------------------
-            // --                                         Add Booking                                             --
-            // -----------------------------------------------------------------------------------------------------
-            if (Integer.parseInt(userInput) == 1) {
-
-                bookingAddMenu = true;
-                statusMessage = "";
+            // Check for non numeric input
+            else if (!isNumeric(userInput)) {
+                statusMessage = "Invalid input. Please type a valid number:";
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+            }
+            // Check for input outside scope of 1-5
+            else if (Integer.parseInt(userInput) < 1 || Integer.parseInt(userInput) > 5) {
+                statusMessage = "Invalid input. Please type a valid number:";
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+            }
+            // Logic for Airports input 1-5
+            else {
 
-                // Add booking loop
-                while (bookingAddMenu) {
-                    // Locals
-                    int storedIsActive = -1;
-                    String storedStripeId = null;
-                    int storedBookerId = -1;
-                    int inputCounter = 1;
+                // -----------------------------------------------------------------------------------------------------
+                // --                                         Add Booking                                             --
+                // -----------------------------------------------------------------------------------------------------
+                if (Integer.parseInt(userInput) == 1) {
 
-                    System.out.println("ADMINISTRATOR - ADD BOOKING\n");
+                    bookingAddMenu = true;
+                    statusMessage = "";
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
 
-                    System.out.println("(Type \"quit\" or \"exit\" to quit program at any time)");
-                    System.out.println("(Type \"goback\" to return to previous menu)\n");
+                    // Add booking loop
+                    while (bookingAddMenu) {
+                        // Locals
+                        int storedIsActive = -1;
+                        String storedStripeId = null;
+                        int storedBookerId = -1;
+                        int inputCounter = 1;
 
-                    System.out.println("Input in order: Is Active flag, Stripe Id, Booker Id:\n");
+                        System.out.println("ADMINISTRATOR - ADD BOOKING\n");
 
-                    // Use int counters and loops to keep track of proper input sequence and store values only with proper input
+                        System.out.println("(Type \"quit\" or \"exit\" to quit program at any time)");
+                        System.out.println("(Type \"goback\" to return to previous menu)\n");
 
-                    // Get input of is active flag 1st
-                    while(inputCounter == 1) { // Input counter starts at 1
+                        System.out.println("Input in order: Is Active flag, Stripe Id, Booker Id:\n");
 
-                        System.out.println(statusMessage);
-                        System.out.print("> "); // User prompt
-                        userInput = objBuffRead.readLine();
+                        // Use int counters and loops to keep track of proper input sequence and store values only with proper input
 
-                        // Check if "quit" or "exit" was typed
-                        if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
-                            System.out.println("Now exiting.");
-                            System.exit(0);
+                        // Get input of is active flag 1st
+                        while(inputCounter == 1) { // Input counter starts at 1
+
+                            System.out.println(statusMessage);
+                            System.out.print("> "); // User prompt
+                            userInput = objBuffRead.readLine();
+
+                            // Check if "quit" or "exit" was typed
+                            if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                                System.out.println("Now exiting.");
+                                System.exit(0);
+                            }
+                            // Check if "goback" was typed
+                            if (Objects.equals(userInput, "goback")) {
+                                bookingAddMenu = false;
+                                statusMessage = "";
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                                break;
+                            }
+
+                            // Input checks
+
+                            storedIsActive = Integer.parseInt(userInput);
+                            statusMessage = "Is Active Flag - " + storedIsActive + " - was accepted";
+                            inputCounter++; // Increase to 2
+
                         }
-                        // Check if "goback" was typed
-                        if (Objects.equals(userInput, "goback")) {
-                            bookingAddMenu = false;
-                            statusMessage = "";
-                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+
+                        // Get input of stripe Id 2nd
+                        while(inputCounter == 2) {
+
+                            System.out.println(statusMessage);
+                            System.out.print("> "); // User prompt
+                            userInput = objBuffRead.readLine();
+
+                            // Check if "quit" or "exit" was typed
+                            if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                                System.out.println("Now exiting.");
+                                System.exit(0);
+                            }
+                            // Check if "goback" was typed
+                            if (Objects.equals(userInput, "goback")) {
+                                bookingAddMenu = false;
+                                statusMessage = "";
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                                break;
+                            }
+
+                            // Input checks
+                            storedStripeId = userInput;
+                            statusMessage = "Stripe Id - " + storedStripeId + " - was accepted";
+                            inputCounter++; // Increase to 3
+                        }
+
+                        // Get input of booker Id 3rd
+                        while(inputCounter == 3) {
+
+                            System.out.println(statusMessage);
+                            System.out.print("> "); // User prompt
+                            userInput = objBuffRead.readLine();
+
+                            // Check if "quit" or "exit" was typed
+                            if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                                System.out.println("Now exiting.");
+                                System.exit(0);
+                            }
+                            // Check if "goback" was typed
+                            if (Objects.equals(userInput, "goback")) {
+                                bookingAddMenu = false;
+                                statusMessage = "";
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                                break;
+                            }
+
+                            // Input checks
+                            storedBookerId = Integer.parseInt(userInput);
+
+                            // Connect to SQL database
+                            BookingDAO objBookingDAO = new BookingDAO();
+                            if(objBookingDAO.addBooking(storedIsActive, storedStripeId, storedBookerId)) {
+                                statusMessage = "Booking successfully added";
+                            }
+                            else {
+                                statusMessage = "Something went wrong. Booking was not added";
+                            }
                             break;
                         }
 
+                    }
+                }
+
+                // -----------------------------------------------------------------------------------------------------
+                // --                                       Update Booking                                            --
+                // -----------------------------------------------------------------------------------------------------
+                if (isNumeric(userInput)) {
+                    if (Integer.parseInt(userInput) == 2) {
 
                     }
+                }
 
-                    // Get input of stripe Id 2nd
-                    while(inputCounter == 2) {
+                // -----------------------------------------------------------------------------------------------------
+                // --                                       Delete Booking                                            --
+                // -----------------------------------------------------------------------------------------------------
+                if (isNumeric(userInput)) {
+                    if (Integer.parseInt(userInput) == 3) {
 
                     }
+                }
 
-                    // Get input of booker Id 3rd
-                    while(inputCounter == 3) {
+                // -----------------------------------------------------------------------------------------------------
+                // --                                        View Bookings                                            --
+                // -----------------------------------------------------------------------------------------------------
+                if (isNumeric(userInput)) {
+                    if (Integer.parseInt(userInput) == 4) {
 
                     }
+                }
 
+                // Return to previous menu
+                if (isNumeric(userInput)) {
+                    if (Integer.parseInt(userInput) == 5) {
+                        statusMessage = "";
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                        break;
+                    }
                 }
             }
 
-            // -----------------------------------------------------------------------------------------------------
-            // --                                       Update Booking                                            --
-            // -----------------------------------------------------------------------------------------------------
-            if (isNumeric(userInput)) {
-                if (Integer.parseInt(userInput) == 2) {
 
-                }
-            }
-
-            // -----------------------------------------------------------------------------------------------------
-            // --                                       Delete Booking                                            --
-            // -----------------------------------------------------------------------------------------------------
-            if (isNumeric(userInput)) {
-                if (Integer.parseInt(userInput) == 3) {
-
-                }
-            }
-
-            // -----------------------------------------------------------------------------------------------------
-            // --                                        View Bookings                                            --
-            // -----------------------------------------------------------------------------------------------------
-            if (isNumeric(userInput)) {
-                if (Integer.parseInt(userInput) == 4) {
-
-                }
-            }
-
-            // Return to previous menu
-            if (isNumeric(userInput)) {
-                if (Integer.parseInt(userInput) == 5) {
-                    statusMessage = "";
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
-                    break;
-                }
-            }
 
         }
 

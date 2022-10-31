@@ -1,8 +1,14 @@
 import Airport_pckg.AirportDAO;
 
+import Booking_pckg.BookingDAO;
+import Employees_pckg.EmployeeDAO;
+import Flights_pckg.FlightDAO;
+import Flights_pckg.Flight_DetailsDAO;
 import Traveler_pckg.TravelerDAO;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -52,5 +58,39 @@ public class JUnitTests {
         TravelerDAO testTravelerDAO = new TravelerDAO();
         testTravelerDAO.viewTravelers();
     }
+
+    // Test flight details add/delete methods
+    @Test
+    public void test1() throws SQLException, ClassNotFoundException {
+
+        Flight_DetailsDAO testFlight_DetailsDAO = new Flight_DetailsDAO();
+        testFlight_DetailsDAO.addFlightDetails("600", "KJFK","KMIA");
+    }
+
+    // Test flight add/delete methods
+    @Test
+    public void test2() throws SQLException, ClassNotFoundException {
+
+        FlightDAO testFlightDAO = new FlightDAO();
+        testFlightDAO.addFlight("2000/01/01", 5, 350.89, "2000/01/01", "500");
+    }
+
+    // Test employee add/delete methods
+    @Test
+    public void test4() throws SQLException, ClassNotFoundException {
+
+        EmployeeDAO testEmployeeDAO = new EmployeeDAO();
+        testEmployeeDAO.addEmployee("password", "toddtodd@sstack.com", "Todd", "Todd", 1, 0, 10);
+    }
+
+    // Test booking add/delete methods (dependent on foreign key userId from tbl_users)
+    @Test
+    public void test3() throws SQLException, ClassNotFoundException {
+
+        BookingDAO testBookingDAO = new BookingDAO();
+        testBookingDAO.addBooking(1, "40", 103);
+    }
+
+
 
 }

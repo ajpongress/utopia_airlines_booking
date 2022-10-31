@@ -1,6 +1,5 @@
 package Traveler_pckg;
 
-import Airport_pckg.AirportDTO;
 import Utility.SQLConnect_Singleton;
 import java.sql.*;
 

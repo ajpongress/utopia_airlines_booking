@@ -53,105 +53,174 @@ public class Flight_Details {
                 System.out.println("Now exiting.");
                 System.exit(0);
             }
-
-            // -----------------------------------------------------------------------------------------------------
-            // --                                      Add Flight Detail                                          --
-            // -----------------------------------------------------------------------------------------------------
-
-            if (Integer.parseInt(userInput) == 1) {
-
-                flightDetailsAddMenu = true;
-                statusMessage = "";
+            // Check for non numeric input
+            else if (!isNumeric(userInput)) {
+                statusMessage = "Invalid input. Please type a valid number:";
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+            }
+            // Check for input outside scope of 1-5
+            else if (Integer.parseInt(userInput) < 1 || Integer.parseInt(userInput) > 5) {
+                statusMessage = "Invalid input. Please type a valid number:";
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+            }
+            // Logic for Airports input 1-5
+            else {
 
-                // Add flight details loop
-                while (flightDetailsAddMenu) {
-                    // Locals
-                    String storedflightNumber = null;
-                    String storedDepartCityId = null;
-                    String storedArriveCityId = null;
-                    int inputCounter = 1;
+                // -----------------------------------------------------------------------------------------------------
+                // --                                      Add Flight Detail                                          --
+                // -----------------------------------------------------------------------------------------------------
+                if (Integer.parseInt(userInput) == 1) {
 
-                    System.out.println("ADMINISTRATOR - ADD FLIGHT DETAILS\n");
+                    flightDetailsAddMenu = true;
+                    statusMessage = "";
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
 
-                    System.out.println("(Type \"quit\" or \"exit\" to quit program at any time)");
-                    System.out.println("(Type \"goback\" to return to previous menu)\n");
+                    // Add flight details loop
+                    while (flightDetailsAddMenu) {
+                        // Locals
+                        String storedflightNumber = null;
+                        String storedDepartCityId = null;
+                        String storedArriveCityId = null;
+                        int inputCounter = 1;
 
-                    System.out.println("Input in order: Flight Number, Departure Airport Id, Arrival Airport Id:\n");
+                        System.out.println("ADMINISTRATOR - ADD FLIGHT DETAILS\n");
 
-                    // Use int counters and loops to keep track of proper input sequence and store values only with proper input
+                        System.out.println("(Type \"quit\" or \"exit\" to quit program at any time)");
+                        System.out.println("(Type \"goback\" to return to previous menu)\n");
 
-                    // Get input of flight number 1st
-                    while(inputCounter == 1) { // Input counter starts at 1
+                        System.out.println("Input in order: Flight Number, Departure Airport Id, Arrival Airport Id:\n");
 
-                        System.out.println(statusMessage);
-                        System.out.print("> "); // User prompt
-                        userInput = objBuffRead.readLine();
+                        // Use int counters and loops to keep track of proper input sequence and store values only with proper input
 
-                        // Check if "quit" or "exit" was typed
-                        if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
-                            System.out.println("Now exiting.");
-                            System.exit(0);
+                        // Get input of flight number 1st
+                        while(inputCounter == 1) { // Input counter starts at 1
+
+                            System.out.println(statusMessage);
+                            System.out.print("> "); // User prompt
+                            userInput = objBuffRead.readLine();
+
+                            // Check if "quit" or "exit" was typed
+                            if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                                System.out.println("Now exiting.");
+                                System.exit(0);
+                            }
+                            // Check if "goback" was typed
+                            if (Objects.equals(userInput, "goback")) {
+                                flightDetailsAddMenu = false;
+                                statusMessage = "";
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                                break;
+                            }
+
+                            // Input checks
+
+                            storedflightNumber = userInput;
+                            statusMessage = "Flight Number - " + storedflightNumber + " - was accepted";
+                            inputCounter++; // Increase to 2
+
                         }
-                        // Check if "goback" was typed
-                        if (Objects.equals(userInput, "goback")) {
-                            flightDetailsAddMenu = false;
-                            statusMessage = "";
-                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+
+                        // Get input of depart airport id 2nd
+                        while(inputCounter == 2) {
+
+                            System.out.println(statusMessage);
+                            System.out.print("> "); // User prompt
+                            userInput = objBuffRead.readLine();
+
+                            // Check if "quit" or "exit" was typed
+                            if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                                System.out.println("Now exiting.");
+                                System.exit(0);
+                            }
+                            // Check if "goback" was typed
+                            if (Objects.equals(userInput, "goback")) {
+                                flightDetailsAddMenu = false;
+                                statusMessage = "";
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                                break;
+                            }
+
+                            // Input checks
+                            storedDepartCityId = userInput;
+                            statusMessage = "Departure Airport Id - " + storedDepartCityId + " - was accepted";
+                            inputCounter++; // Increase to 3
+                        }
+
+                        // Get input of arrive airport id 3rd
+                        while(inputCounter == 3) {
+
+                            System.out.println(statusMessage);
+                            System.out.print("> "); // User prompt
+                            userInput = objBuffRead.readLine();
+
+                            // Check if "quit" or "exit" was typed
+                            if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                                System.out.println("Now exiting.");
+                                System.exit(0);
+                            }
+                            // Check if "goback" was typed
+                            if (Objects.equals(userInput, "goback")) {
+                                flightDetailsAddMenu = false;
+                                statusMessage = "";
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                                break;
+                            }
+
+                            // Input checks
+                            storedArriveCityId = userInput;
+
+                            // Connect to SQL database
+                            Flight_DetailsDAO objFlight_DetailsDAO = new Flight_DetailsDAO();
+                            if(objFlight_DetailsDAO.addFlightDetails(storedflightNumber, storedDepartCityId, storedArriveCityId)) {
+                                statusMessage = "Flight details successfully added";
+                            }
+                            else {
+                                statusMessage = "Something went wrong. Flight details were not added";
+                            }
                             break;
                         }
 
+                    }
+                }
+
+                // -----------------------------------------------------------------------------------------------------
+                // --                                    Update Flight Detail                                         --
+                // -----------------------------------------------------------------------------------------------------
+                if (isNumeric(userInput)) {
+                    if (Integer.parseInt(userInput) == 2) {
 
                     }
+                }
 
-                    // Get input of depart airport id 2nd
-                    while(inputCounter == 2) {
+                // -----------------------------------------------------------------------------------------------------
+                // --                                    Delete Flight Detail                                         --
+                // -----------------------------------------------------------------------------------------------------
+                if (isNumeric(userInput)) {
+                    if (Integer.parseInt(userInput) == 3) {
 
                     }
+                }
 
-                    // Get input of arrive airport id 3rd
-                    while(inputCounter == 3) {
+                // -----------------------------------------------------------------------------------------------------
+                // --                                     View Flight Details                                         --
+                // -----------------------------------------------------------------------------------------------------
+                if (isNumeric(userInput)) {
+                    if (Integer.parseInt(userInput) == 4) {
 
                     }
+                }
 
+                // Return to previous menu
+                if (isNumeric(userInput)) {
+                    if (Integer.parseInt(userInput) == 5) {
+                        statusMessage = "";
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                        break;
+                    }
                 }
             }
 
-            // -----------------------------------------------------------------------------------------------------
-            // --                                    Update Flight Detail                                         --
-            // -----------------------------------------------------------------------------------------------------
-            if (isNumeric(userInput)) {
-                if (Integer.parseInt(userInput) == 2) {
 
-                }
-            }
-
-            // -----------------------------------------------------------------------------------------------------
-            // --                                    Delete Flight Detail                                         --
-            // -----------------------------------------------------------------------------------------------------
-            if (isNumeric(userInput)) {
-                if (Integer.parseInt(userInput) == 3) {
-
-                }
-            }
-
-            // -----------------------------------------------------------------------------------------------------
-            // --                                     View Flight Details                                         --
-            // -----------------------------------------------------------------------------------------------------
-            if (isNumeric(userInput)) {
-                if (Integer.parseInt(userInput) == 4) {
-
-                }
-            }
-
-            // Return to previous menu
-            if (isNumeric(userInput)) {
-                if (Integer.parseInt(userInput) == 5) {
-                    statusMessage = "";
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
-                    break;
-                }
-            }
 
         }
 

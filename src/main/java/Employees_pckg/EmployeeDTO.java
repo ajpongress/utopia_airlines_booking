@@ -2,63 +2,23 @@ package Employees_pckg;
 
 public class EmployeeDTO {
 
-    private int roleId;
-    private String given_name;
-    private String family_name;
-    private String username;
-    private String email;
     private String password;
-    private String phone;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private int enabled;
+    private int locked;
+    private int userRole;
 
-    public EmployeeDTO(int _roleId, String _given_name, String _family_name, String _username, String _email, String _password, String _phone ) {
+    public EmployeeDTO(String _password, String _email, String _firstName, String _lastName, int _enabled, int _locked, int _userRole) {
 
-        setRoleId(_roleId);
-        setGiven_name(_given_name);
-        setFamily_name(_family_name);
-        setUsername(_username);
-        setEmail(_email);
         setPassword(_password);
-        setPhone(_phone);
-    }
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getGiven_name() {
-        return given_name;
-    }
-
-    public void setGiven_name(String given_name) {
-        this.given_name = given_name;
-    }
-
-    public String getFamily_name() {
-        return family_name;
-    }
-
-    public void setFamily_name(String family_name) {
-        this.family_name = family_name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        setEmail(_email);
+        setFirstName(_firstName);
+        setLastName(_lastName);
+        setEnabled(_enabled);
+        setLocked(_locked);
+        setUserRole(_userRole);
     }
 
     public String getPassword() {
@@ -69,11 +29,51 @@ public class EmployeeDTO {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+
+    public int getLocked() {
+        return locked;
+    }
+
+    public void setLocked(int locked) {
+        this.locked = locked;
+    }
+
+    public int getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(int userRole) {
+        this.userRole = userRole;
     }
 }

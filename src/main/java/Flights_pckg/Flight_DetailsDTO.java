@@ -6,10 +6,10 @@ public class Flight_DetailsDTO {
     private String departCityId;
     private String arriveCityId;
 
-    public Flight_DetailsDTO(String _flightNumber, String _departCItyId, String _arriveCityId) {
+    public Flight_DetailsDTO(String _flightNumber, String _departCityId, String _arriveCityId) {
 
         setFlightNumber(_flightNumber);
-        setDepartCityId(_arriveCityId);
+        setDepartCityId(_departCityId);
         setArriveCityId(_arriveCityId);
     }
 

@@ -1,14 +1,16 @@
 package Flights_pckg;
 
+import java.math.BigDecimal;
+
 public class FlightDTO {
 
     private String departTime;
     private int seatsAvailable;
-    private float price;
+    private double price;
     private String arrivalTime;
     private String flightNumber;
 
-    public FlightDTO (String _departTime, int _seatsAvailable, float _price, String _arrivalTime, String _flightNumber) {
+    public FlightDTO (String _departTime, int _seatsAvailable, double _price, String _arrivalTime, String _flightNumber) {
 
         setDepartTime(_departTime);
         setSeatsAvailable(_seatsAvailable);
@@ -33,11 +35,11 @@ public class FlightDTO {
         this.seatsAvailable = seatsAvailable;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
