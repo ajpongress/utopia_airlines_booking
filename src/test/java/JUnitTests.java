@@ -61,34 +61,38 @@ public class JUnitTests {
 
     // Test flight details add/delete methods
     @Test
-    public void test1() throws SQLException, ClassNotFoundException {
+    public void adds_flight_detail_900_from_KSEA_to_KJFK_and_deletes_flight_900() throws SQLException, ClassNotFoundException {
 
         Flight_DetailsDAO testFlight_DetailsDAO = new Flight_DetailsDAO();
-        testFlight_DetailsDAO.addFlightDetails("600", "KJFK","KMIA");
+        testFlight_DetailsDAO.addFlightDetails("900", "KSEA","KJFK");
+        testFlight_DetailsDAO.deleteFlight_Details("900");
     }
 
     // Test flight add/delete methods
     @Test
-    public void test2() throws SQLException, ClassNotFoundException {
+    public void adds_flight_100_departing_2000_1_1_arriving_2000_1_1_78_seatsavailable_price_454_19_and_deletes_based_on_flight_100() throws SQLException, ClassNotFoundException {
 
         FlightDAO testFlightDAO = new FlightDAO();
-        testFlightDAO.addFlight("2000/01/01", 5, 350.89, "2000/01/01", "500");
+        testFlightDAO.addFlight("2000/01/01", 78, 454.19, "2000/01/01", "100");
+        testFlightDAO.deleteFlight("100");
     }
 
     // Test employee add/delete methods
     @Test
-    public void test4() throws SQLException, ClassNotFoundException {
+    public void adds_employee_Michael_Scott_with_email_michaelscott_at_sstack_with_password_bestbossinworld_enabled1_locked0_userRole23_and_deletes_Michael_Scott() throws SQLException, ClassNotFoundException {
 
         EmployeeDAO testEmployeeDAO = new EmployeeDAO();
-        testEmployeeDAO.addEmployee("password", "toddtodd@sstack.com", "Todd", "Todd", 1, 0, 10);
+        testEmployeeDAO.addEmployee("bestbossinworld", "michaelscott@sstack.com", "Michael", "Scott", 1, 0, 23);
+        testEmployeeDAO.deleteEmployee("Scott");
     }
 
     // Test booking add/delete methods (dependent on foreign key userId from tbl_users)
     @Test
-    public void test3() throws SQLException, ClassNotFoundException {
+    public void adds_booking_active_1_stripeId_66_bookerId_103_and_deletes_based_on_stripeId_66() throws SQLException, ClassNotFoundException {
 
         BookingDAO testBookingDAO = new BookingDAO();
-        testBookingDAO.addBooking(1, "40", 103);
+        testBookingDAO.addBooking(1, "66", 103);
+        testBookingDAO.deleteBooking("66");
     }
 
 

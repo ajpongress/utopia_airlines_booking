@@ -1,5 +1,6 @@
 package Flights_pckg;
 
+import Traveler_pckg.TravelerDTO;
 import Utility.SQLConnect_Singleton;
 import java.sql.*;
 
@@ -20,6 +21,33 @@ public class Flight_DetailsDAO {
             prepstmt.setString(1, objFlight_DetailsDTO.getFlightNumber());
             prepstmt.setString(2, objFlight_DetailsDTO.getDepartCityId());
             prepstmt.setString(3, objFlight_DetailsDTO.getArriveCityId());
+            prepstmt.executeUpdate();
+            conn.commit();
+            conn.setAutoCommit(true);
+            success = true;
+
+        } catch (SQLException sqle) {
+            conn.rollback();
+            System.out.println("Invalid SQL query: " + sqle);
+        } finally {
+            if (conn != null) conn.close();
+        }
+        return success;
+    }
+
+    // Delete flight details
+    public boolean deleteFlight_Details(String flightNumber) throws SQLException, ClassNotFoundException {
+
+        boolean success = false;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
+        Flight_DetailsDTO objFlight_DetailsDTO = new Flight_DetailsDTO(flightNumber, "", "");
+
+        String query = "DELETE FROM tbl_flight_details WHERE flightNumber=?";
+
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement prepstmt = conn.prepareStatement(query);
+            prepstmt.setString(1, objFlight_DetailsDTO.getFlightNumber());
             prepstmt.executeUpdate();
             conn.commit();
             conn.setAutoCommit(true);

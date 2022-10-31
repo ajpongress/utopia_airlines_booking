@@ -1,6 +1,7 @@
 package Employees_pckg;
 
 import Flights_pckg.FlightDTO;
+import Flights_pckg.Flight_DetailsDTO;
 import Utility.SQLConnect_Singleton;
 import java.sql.*;
 
@@ -25,6 +26,33 @@ public class EmployeeDAO {
             prepstmt.setInt(5, objEmployeeDTO.getEnabled());
             prepstmt.setInt(6, objEmployeeDTO.getLocked());
             prepstmt.setInt(7, objEmployeeDTO.getUserRole());
+            prepstmt.executeUpdate();
+            conn.commit();
+            conn.setAutoCommit(true);
+            success = true;
+
+        } catch (SQLException sqle) {
+            conn.rollback();
+            System.out.println("Invalid SQL query: " + sqle);
+        } finally {
+            if (conn != null) conn.close();
+        }
+        return success;
+    }
+
+    // Delete employee
+    public boolean deleteEmployee(String lastName) throws SQLException, ClassNotFoundException {
+
+        boolean success = false;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
+        EmployeeDTO objEmployeeDTO = new EmployeeDTO("", "", "", lastName, 0, 0, 0);
+
+        String query = "DELETE FROM tbl_users WHERE lastName=?";
+
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement prepstmt = conn.prepareStatement(query);
+            prepstmt.setString(1, objEmployeeDTO.getLastName());
             prepstmt.executeUpdate();
             conn.commit();
             conn.setAutoCommit(true);

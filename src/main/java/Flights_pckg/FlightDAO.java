@@ -38,4 +38,31 @@ public class FlightDAO {
         }
         return success;
     }
+
+    // Delete flight
+    public boolean deleteFlight(String flightNumber) throws SQLException, ClassNotFoundException {
+
+        boolean success = false;
+        Connection conn = SQLConnect_Singleton.getInstance().getConnection();
+        FlightDTO objFlightDTO = new FlightDTO("",0,0,"", flightNumber);
+
+        String query = "DELETE FROM tbl_flight WHERE flightNumber=?";
+
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement prepstmt = conn.prepareStatement(query);
+            prepstmt.setString(1, objFlightDTO.getFlightNumber());
+            prepstmt.executeUpdate();
+            conn.commit();
+            conn.setAutoCommit(true);
+            success = true;
+
+        } catch (SQLException sqle) {
+            conn.rollback();
+            System.out.println("Invalid SQL query: " + sqle);
+        } finally {
+            if (conn != null) conn.close();
+        }
+        return success;
+    }
 }
