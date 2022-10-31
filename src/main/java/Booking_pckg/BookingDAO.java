@@ -1,7 +1,5 @@
 package Booking_pckg;
 
-import Employees_pckg.EmployeeDTO;
-import Flights_pckg.FlightDTO;
 import Utility.SQLConnect_Singleton;
 import java.sql.*;
 

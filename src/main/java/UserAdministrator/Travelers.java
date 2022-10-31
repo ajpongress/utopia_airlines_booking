@@ -1,14 +1,11 @@
 package UserAdministrator;
 
-import Airport_pckg.AirportDAO;
 import Traveler_pckg.TravelerDAO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Travelers {
 

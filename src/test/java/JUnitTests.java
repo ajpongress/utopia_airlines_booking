@@ -8,9 +8,7 @@ import Traveler_pckg.TravelerDAO;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Tag("myCustomTag")

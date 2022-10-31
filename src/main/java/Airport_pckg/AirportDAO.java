@@ -2,7 +2,6 @@ package Airport_pckg;
 
 import Utility.SQLConnect_Singleton;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class AirportDAO {
 

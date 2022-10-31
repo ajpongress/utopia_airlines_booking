@@ -1,16 +1,11 @@
 package UserAdministrator;
 
 import Flights_pckg.FlightDAO;
-import Traveler_pckg.TravelerDAO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.Currency.*;
 
 public class Flights {
 

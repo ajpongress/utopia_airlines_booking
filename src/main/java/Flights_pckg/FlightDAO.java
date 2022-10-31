@@ -1,9 +1,6 @@
 package Flights_pckg;
 
-import Traveler_pckg.TravelerDTO;
 import Utility.SQLConnect_Singleton;
-
-import java.math.BigDecimal;
 import java.sql.*;
 
 public class FlightDAO {

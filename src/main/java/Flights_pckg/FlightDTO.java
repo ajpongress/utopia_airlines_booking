@@ -1,6 +1,5 @@
 package Flights_pckg;
 
-import java.math.BigDecimal;
 
 public class FlightDTO {
 
