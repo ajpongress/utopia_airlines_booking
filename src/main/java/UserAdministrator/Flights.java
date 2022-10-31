@@ -1,6 +1,7 @@
 package UserAdministrator;
 
 import Flights_pckg.FlightDAO;
+import Traveler_pckg.TravelerDAO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -255,6 +256,47 @@ public class Flights {
                 if (isNumeric(userInput)) {
                     if (Integer.parseInt(userInput) == 3) {
 
+                        // Delete flight loop
+                        while (true) {
+                            // Locals
+                            String storedFlightNumber = null;
+
+                            System.out.println("ADMINISTRATOR - DELETE FLIGHT\n");
+
+                            System.out.println("(Type \"quit\" or \"exit\" to quit program at any time)");
+                            System.out.println("(Type \"goback\" to return to previous menu)\n");
+
+                            System.out.println("Input flight number:");
+
+                            System.out.println(statusMessage);
+                            System.out.print("> "); // User prompt
+                            userInput = objBuffRead.readLine();
+
+                            // Check if "quit" or "exit" was typed
+                            if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                                System.out.println("Now exiting.");
+                                System.exit(0);
+                            }
+                            // Check if "goback" was typed
+                            if (Objects.equals(userInput, "goback")) {
+                                statusMessage = "";
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                                break;
+                            }
+
+                            storedFlightNumber = userInput;
+
+                            // Connect to database
+                            FlightDAO objFlightDAO = new FlightDAO();
+                            if (objFlightDAO.deleteFlight(storedFlightNumber)) {
+                                statusMessage = "Airport successfully deleted";
+                            }
+                            else {
+                                statusMessage = "Something went wrong. Airport was not deleted";
+                            }
+                            break;
+
+                        }//END delete airport while loop
                     }
                 }
 
@@ -263,7 +305,13 @@ public class Flights {
                 // -----------------------------------------------------------------------------------------------------
                 if (isNumeric(userInput)) {
                     if (Integer.parseInt(userInput) == 4) {
+                        statusMessage = "";
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
 
+                        FlightDAO objFlightDAO = new FlightDAO();
+                        System.out.println("\n");
+                        objFlightDAO.viewFlights();
+                        System.out.println("\n");
                     }
                 }
 

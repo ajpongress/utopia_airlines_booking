@@ -1,5 +1,6 @@
 package UserAdministrator;
 
+import Airport_pckg.AirportDAO;
 import Traveler_pckg.TravelerDAO;
 
 import java.io.BufferedReader;
@@ -251,6 +252,47 @@ public class Travelers {
                 if (isNumeric(userInput)) {
                     if (Integer.parseInt(userInput) == 3) {
 
+                        // Delete traveler loop
+                        while (true) {
+                            // Locals
+                            String storedName = null;
+
+                            System.out.println("ADMINISTRATOR - DELETE TRAVELLER\n");
+
+                            System.out.println("(Type \"quit\" or \"exit\" to quit program at any time)");
+                            System.out.println("(Type \"goback\" to return to previous menu)\n");
+
+                            System.out.println("Input full name:");
+
+                            System.out.println(statusMessage);
+                            System.out.print("> "); // User prompt
+                            userInput = objBuffRead.readLine();
+
+                            // Check if "quit" or "exit" was typed
+                            if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                                System.out.println("Now exiting.");
+                                System.exit(0);
+                            }
+                            // Check if "goback" was typed
+                            if (Objects.equals(userInput, "goback")) {
+                                statusMessage = "";
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                                break;
+                            }
+
+                            storedName = userInput;
+
+                            // Connect to database
+                            TravelerDAO objTravelerDAO = new TravelerDAO();
+                            if (objTravelerDAO.deleteTraveler(storedName)) {
+                                statusMessage = "Airport successfully deleted";
+                            }
+                            else {
+                                statusMessage = "Something went wrong. Airport was not deleted";
+                            }
+                            break;
+
+                        }//END delete airport while loop
                     }
                 }
 

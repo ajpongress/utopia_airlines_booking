@@ -2,6 +2,7 @@ package UserAdministrator;
 
 import Airport_pckg.AirportDAO;
 import Employees_pckg.EmployeeDAO;
+import Traveler_pckg.TravelerDAO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -305,6 +306,47 @@ public class Employees {
                 if (isNumeric(userInput)) {
                     if (Integer.parseInt(userInput) == 3) {
 
+                        // Delete employee loop
+                        while (true) {
+                            // Locals
+                            String storedLastName = null;
+
+                            System.out.println("ADMINISTRATOR - DELETE EMPLOYEE\n");
+
+                            System.out.println("(Type \"quit\" or \"exit\" to quit program at any time)");
+                            System.out.println("(Type \"goback\" to return to previous menu)\n");
+
+                            System.out.println("Input last name:");
+
+                            System.out.println(statusMessage);
+                            System.out.print("> "); // User prompt
+                            userInput = objBuffRead.readLine();
+
+                            // Check if "quit" or "exit" was typed
+                            if (Objects.equals(userInput, "exit") || Objects.equals(userInput, "quit")) {
+                                System.out.println("Now exiting.");
+                                System.exit(0);
+                            }
+                            // Check if "goback" was typed
+                            if (Objects.equals(userInput, "goback")) {
+                                statusMessage = "";
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
+                                break;
+                            }
+
+                            storedLastName = userInput;
+
+                            // Connect to database
+                            EmployeeDAO objEmployeeDAO = new EmployeeDAO();
+                            if (objEmployeeDAO.deleteEmployee(storedLastName)) {
+                                statusMessage = "Airport successfully deleted";
+                            }
+                            else {
+                                statusMessage = "Something went wrong. Airport was not deleted";
+                            }
+                            break;
+
+                        }//END delete airport while loop
                     }
                 }
 
@@ -313,7 +355,13 @@ public class Employees {
                 // -----------------------------------------------------------------------------------------------------
                 if (isNumeric(userInput)) {
                     if (Integer.parseInt(userInput) == 4) {
+                        statusMessage = "";
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clear screen
 
+                        EmployeeDAO objEmployeeDAO = new EmployeeDAO();
+                        System.out.println("\n");
+                        objEmployeeDAO.viewEmployees();
+                        System.out.println("\n");
                     }
                 }
 
